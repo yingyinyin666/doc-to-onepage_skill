@@ -2,11 +2,14 @@
 import argparse
 import os
 import re
-import PyPDF2
-import docx
 
 def process_pdf(file_path):
     """处理PDF文件，提取文本内容"""
+    try:
+        import PyPDF2
+    except ImportError:
+        print("Error: PyPDF2 未安装，请运行: pip install PyPDF2")
+        return ""
     text = ""
     try:
         with open(file_path, 'rb') as f:
@@ -20,6 +23,11 @@ def process_pdf(file_path):
 
 def process_docx(file_path):
     """处理Word文档，提取文本内容"""
+    try:
+        import docx
+    except ImportError:
+        print("Error: python-docx 未安装，请运行: pip install python-docx")
+        return ""
     text = ""
     try:
         doc = docx.Document(file_path)

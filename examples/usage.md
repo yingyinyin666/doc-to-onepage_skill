@@ -31,8 +31,7 @@ python3 scripts/export_onepage_json.py \
 
 python3 scripts/build_web_onepage.py \
   --data ./output/data.json \
-  --style report \
-  --animation minimal \
+  --style dark \
   --outdir ./output/web
 ```
 
@@ -98,31 +97,35 @@ python3 scripts/apply_updates.py \
 
 ---
 
-## 示例5：使用不同风格和动效
+## 示例5：使用不同视觉风格
 
 ```bash
-# 决策汇报风格（极简动效）
+# 暗色高级风格（默认，适合高层汇报）
 python3 scripts/build_web_onepage.py \
   --data ./output/data.json \
-  --style report \
-  --animation minimal \
-  --outdir ./output/web_report
+  --style dark \
+  --outdir ./output/web_dark
 
-# 项目推进风格（有节奏动效）
+# 清爽浅色风格（适合日常周报）
 python3 scripts/build_web_onepage.py \
   --data ./output/data.json \
-  --style project \
-  --animation stagger \
-  --outdir ./output/web_project
+  --style light \
+  --outdir ./output/web_light
 
-# 宣传海报风格（强化动效）
+# 正式商务风格（适合跨部门汇报）
 python3 scripts/build_web_onepage.py \
   --data ./output/data.json \
-  --style promotion \
-  --animation poster \
-  --theme poster \
-  --outdir ./output/web_poster
+  --style corporate \
+  --outdir ./output/web_corporate
+
+# 温暖亲和风格（适合团队介绍）
+python3 scripts/build_web_onepage.py \
+  --data ./output/data.json \
+  --style warm \
+  --outdir ./output/web_warm
 ```
+
+> V2 版本会自动识别内容类型并渲染可视化组件（Metric 大数卡片、流程图、旅程线、Priority Badge、Risk Level），无需额外参数。
 
 ---
 

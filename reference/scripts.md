@@ -144,24 +144,25 @@ python3 scripts/build_web_onepage.py \
   --animation <动效风格>
 ```
 
-**风格选项**：
-- `report` - 商务蓝（决策汇报）
-- `tutorial` - 绿色（教程）
-- `promotion` - 橙红渐变（宣传）
-- `project` - 紫色（项目）
-- `default` - 灰色（通用）
+**风格选项**（`--style`）：
+- `dark` - 暗色背景+毛玻璃+彩色光晕，高级感强（默认）
+- `light` - 白色背景+淡灰卡片+蓝色强调，清爽易读
+- `corporate` - 深蓝顶部+白色内容区+严谨排版，专业权威
+- `warm` - 米色背景+暖棕色调+柔和阴影，亲和温暖
 
-**动效选项**：
-- `minimal` - 简洁fade-in
-- `stagger` - 卡片错位
-- `poster` - 缩放动画
-- `default` - 默认
+**V2 可视化组件**（自动识别，无需额外参数）：
+- Metric 大数卡片：检测到加粗数字时自动渲染
+- Flow 流程图：有序列表自动转为时间轴
+- Journey 旅程线：旅程类列表自动转为阶段卡片
+- Priority Badge：表格中 P00/P0/P1 自动渲染为彩色标签
+- Risk Level：风险等级表格中的高/中/低自动着色
+- CTA 决策框：结论区加粗问句独立高亮展示
 
 ---
 
 ### validate_onepage.py
 
-**OnePage 自检与自修复系统** - 在生成网页后，自动进行质量检查并自我优化。
+**OnePage V2 自检与自修复系统** - 在生成网页后，自动进行质量检查并自我优化。适配 V2 模板结构。
 
 ```bash
 python3 scripts/validate_onepage.py \
@@ -170,20 +171,21 @@ python3 scripts/validate_onepage.py \
   --output <输出路径>
 ```
 
-**校验标准**：
+**校验标准**（V2）：
 
-| 检查项 | 权重 |
-|--------|------|
-| 结论优先 | 20分 |
-| CTA行动号召 | 20分 |
-| 风险说明 | 15分 |
-| 模块数量 | 15分 |
-| 视觉层级 | 15分 |
-| 内容长度 | 15分 |
+| 检查项 | 匹配方式 | 权重 |
+|--------|----------|------|
+| 结论优先 | `.conclusion` 区域 | 20分 |
+| CTA行动号召 | `.conclusion-cta` 或决策问句 | 20分 |
+| 风险说明 | `.sec-risk` 或 `.risk-level` | 15分 |
+| 模块数量 | `.card` 数量 ≤ 8 | 15分 |
+| 视觉层级 | metric/flow/timeline 等组件 | 15分 |
+| 内容长度 | HTML < 80KB | 15分 |
 
 **自动修复能力**：
-- 缺少结论区域 → 自动添加结论横幅
-- 缺少风险模块 → 自动添加风险说明
+- 缺少结论区域 → 自动插入 `.conclusion` 区域
+- 缺少 CTA → 自动添加 `.conclusion-cta` 决策框
+- 缺少风险模块 → 自动添加 `.sec-risk` 章节
 
 ---
 
@@ -204,13 +206,15 @@ python3 scripts/screenshot_validator.py \
 - 分析模块数量和内容可见性
 - 输出视觉质量评分
 
-**视觉检查项**：
+**视觉检查项**（V2）：
 | 检查项 | 说明 |
 |--------|------|
-| 结论区域 | 是否存在结论横幅 |
-| CTA按钮 | 是否有按钮或链接 |
-| 标题层级 | H1≥1, H2≤5 |
-| 模块数量 | sections≤8 |
+| 结论区域 | `.conclusion` 是否存在 |
+| CTA决策框 | `.conclusion-cta` 或加粗决策问句 |
+| 标题层级 | H1≥1, card h2≤8 |
+| 模块数量 | `.card` ≤ 8 |
+| 可视化组件 | metric/flow/journey/badge/risk 数量 |
+| 风险模块 | `.sec-risk` 是否存在 |
 | 内容可见性 | 内容是否正常渲染 |
 
 **前置要求**：
