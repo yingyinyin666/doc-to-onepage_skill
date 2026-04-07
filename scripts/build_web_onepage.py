@@ -623,6 +623,67 @@ def _style_vars(style):
             --heading:#2d1f0e;
             --radius:20px;
         ''',
+        # ── 物理隐喻风格 ──
+        'blueprint': '''
+            --bg:#f8f9fc;
+            --surface:rgba(255,255,255,0.95);
+            --glass:white;
+            --glass-border:rgba(70,130,180,0.15);
+            --glass-hover:white;
+            --text:#2c3e50; --text-secondary:#546e7a; --text-muted:#90a4ae;
+            --heading:#1a2530;
+            --radius:4px;
+        ''',
+        'retro': '''
+            --bg:#fef9ef;
+            --surface:#ffffff;
+            --glass:#ffffff;
+            --glass-border:#222222;
+            --glass-hover:#fffdf5;
+            --text:#1a1a1a; --text-secondary:#333333; --text-muted:#666666;
+            --heading:#000000;
+            --radius:6px;
+        ''',
+        'folder': '''
+            --bg:#e8ecf1;
+            --surface:#ffffff;
+            --glass:#ffffff;
+            --glass-border:rgba(0,0,0,0.08);
+            --glass-hover:#fafbfc;
+            --text:#1e293b; --text-secondary:#475569; --text-muted:#94a3b8;
+            --heading:#0f172a;
+            --radius:12px;
+        ''',
+        'receipt': '''
+            --bg:#f5f0eb;
+            --surface:#fffef9;
+            --glass:#fffef9;
+            --glass-border:transparent;
+            --glass-hover:#fffef9;
+            --text:#1a1a1a; --text-secondary:#444444; --text-muted:#888888;
+            --heading:#000000;
+            --radius:0px;
+        ''',
+        'scrapbook': '''
+            --bg:#d4a574;
+            --surface:rgba(255,255,255,0.92);
+            --glass:rgba(255,255,255,0.92);
+            --glass-border:rgba(0,0,0,0.06);
+            --glass-hover:rgba(255,255,255,0.97);
+            --text:#2c1810; --text-secondary:#4a3228; --text-muted:#8b6f5e;
+            --heading:#1a0e08;
+            --radius:4px;
+        ''',
+        'dossier': '''
+            --bg:#b8956a;
+            --surface:rgba(255,255,255,0.95);
+            --glass:rgba(255,255,255,0.95);
+            --glass-border:rgba(0,0,0,0.08);
+            --glass-hover:rgba(255,255,255,0.98);
+            --text:#1e1e1e; --text-secondary:#3d3d3d; --text-muted:#777777;
+            --heading:#111111;
+            --radius:4px;
+        ''',
     }
     return styles.get(style, styles['dark'])
 
@@ -673,8 +734,12 @@ body {
   z-index: 0;
 }
 
-[data-style="light"] .bg-glow, [data-style="corporate"] .bg-glow, [data-style="warm"] .bg-glow { display:none; }
-[data-style="light"] .bg-grid, [data-style="corporate"] .bg-grid, [data-style="warm"] .bg-grid { display:none; }
+[data-style="light"] .bg-glow, [data-style="corporate"] .bg-glow, [data-style="warm"] .bg-glow,
+[data-style="blueprint"] .bg-glow, [data-style="retro"] .bg-glow, [data-style="folder"] .bg-glow,
+[data-style="receipt"] .bg-glow, [data-style="scrapbook"] .bg-glow, [data-style="dossier"] .bg-glow { display:none; }
+[data-style="light"] .bg-grid, [data-style="corporate"] .bg-grid, [data-style="warm"] .bg-grid,
+[data-style="retro"] .bg-grid, [data-style="folder"] .bg-grid, [data-style="receipt"] .bg-grid,
+[data-style="scrapbook"] .bg-grid, [data-style="dossier"] .bg-grid { display:none; }
 
 .wrap { max-width:860px;margin:0 auto;padding:2.5rem 1.25rem 3rem;position:relative;z-index:1; }
 
@@ -1096,6 +1161,347 @@ code {
   .bg-grid{display:none}
 }
 
+/* ════════════════════════════════════════════════
+   物理隐喻风格
+   ════════════════════════════════════════════════ */
+
+/* ── 1. Blueprint 坐标蓝图风 ── */
+[data-style="blueprint"] { font-family:'SF Mono','Fira Code','Noto Sans SC',monospace; }
+[data-style="blueprint"] .bg-grid {
+  display:block !important;
+  background-image:
+    repeating-linear-gradient(0deg,rgba(70,130,180,0.08) 0px,rgba(70,130,180,0.08) 1px,transparent 1px,transparent 40px),
+    repeating-linear-gradient(90deg,rgba(70,130,180,0.08) 0px,rgba(70,130,180,0.08) 1px,transparent 1px,transparent 40px);
+  background-size:40px 40px;
+}
+[data-style="blueprint"] .header {
+  background:white;border:2px solid rgba(70,130,180,0.2);border-radius:4px;
+  backdrop-filter:none;
+}
+[data-style="blueprint"] .header::before {
+  height:2px;background:linear-gradient(90deg,#4682B4,#00897B,#E91E63);
+}
+[data-style="blueprint"] .header h1 {
+  font-family:'Inter','Noto Sans SC',sans-serif;
+  background:linear-gradient(135deg,#1a2530,#4682B4);
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
+}
+[data-style="blueprint"] .card {
+  background:white;border:1px solid rgba(70,130,180,0.2);border-radius:4px;
+  backdrop-filter:none;
+}
+[data-style="blueprint"] .card::before { width:3px;border-radius:0; }
+[data-style="blueprint"] .num { border-radius:4px;font-family:'SF Mono','Fira Code',monospace; }
+[data-style="blueprint"] .sub { border-radius:4px;border:1px solid rgba(70,130,180,0.1); }
+[data-style="blueprint"] .conclusion { border-radius:4px;border:2px solid rgba(70,130,180,0.25);backdrop-filter:none; }
+[data-style="blueprint"] .conclusion::before { background:linear-gradient(90deg,#4682B4,#00897B); }
+[data-style="blueprint"] .conclusion-label { color:#4682B4;background:rgba(70,130,180,0.08);border-color:rgba(70,130,180,0.15); }
+[data-style="blueprint"] .conclusion-content strong { color:#E91E63; }
+[data-style="blueprint"] .conclusion-cta { background:rgba(70,130,180,0.06);border-color:rgba(70,130,180,0.2); }
+[data-style="blueprint"] .metric-card { border-radius:4px;border:1px solid rgba(70,130,180,0.15); }
+[data-style="blueprint"] .flow-content { border-radius:4px; }
+[data-style="blueprint"] table { border-radius:4px;border:1px solid rgba(70,130,180,0.15); }
+[data-style="blueprint"] th { background:rgba(70,130,180,0.06);letter-spacing:0.12em; }
+[data-style="blueprint"] .card-head h2 { font-family:'Inter','Noto Sans SC',sans-serif; }
+
+/* ── 2. Retro 复古风 ── */
+[data-style="retro"] .header {
+  background:#FFE066;border:3px solid #222;border-radius:6px;
+  backdrop-filter:none;
+}
+[data-style="retro"] .header::before { height:0;display:none; }
+[data-style="retro"] .header h1 {
+  background:none;-webkit-text-fill-color:#000;font-size:2.4rem;
+  text-shadow:3px 3px 0 #FFE066;
+}
+[data-style="retro"] .header-tag { color:#555; }
+[data-style="retro"] .header-line { background:#222;height:4px;width:80px;border-radius:0; }
+[data-style="retro"] .card {
+  background:#fff;border:3px solid #222;border-radius:6px;
+  backdrop-filter:none;box-shadow:5px 5px 0 #222;
+}
+[data-style="retro"] .card::before { display:none; }
+[data-style="retro"] .card:hover { transform:translate(-2px,-2px);box-shadow:7px 7px 0 #222; }
+[data-style="retro"] .num {
+  border-radius:50%;width:42px;height:42px;font-size:1rem;
+  box-shadow:2px 2px 0 #222;border:2px solid #222;
+}
+[data-style="retro"] .card:nth-child(3n+1) .num { background:#FF6B6B; }
+[data-style="retro"] .card:nth-child(3n+2) .num { background:#4ECDC4; }
+[data-style="retro"] .card:nth-child(3n) .num { background:#45B7D1; }
+[data-style="retro"] .sub {
+  border:2px solid #eee;border-radius:6px;
+  background:#fafafa;
+}
+[data-style="retro"] .sub h3 { border-bottom:2px dashed #ddd; }
+[data-style="retro"] .sub-content strong { color:#E91E63;font-weight:800; }
+[data-style="retro"] .conclusion {
+  background:#E3F2FD;border:3px solid #222;border-radius:6px;
+  box-shadow:5px 5px 0 #222;backdrop-filter:none;
+}
+[data-style="retro"] .conclusion::before { display:none; }
+[data-style="retro"] .conclusion-label { background:#222;color:#fff;border:none;border-radius:4px;font-size:0.65rem; }
+[data-style="retro"] .conclusion-content strong { color:#D32F2F; }
+[data-style="retro"] .conclusion-cta {
+  background:#FFE066;border:2px solid #222;border-radius:4px;color:#000;
+  box-shadow:3px 3px 0 #222;
+}
+[data-style="retro"] .metric-card {
+  border:2px solid #222;border-radius:6px;box-shadow:3px 3px 0 #222;
+}
+[data-style="retro"] .metric-card::before { display:none; }
+[data-style="retro"] .metric-value { font-size:2.2rem; }
+[data-style="retro"] .priority-badge { border-radius:4px;border-width:2px;font-weight:900; }
+[data-style="retro"] table { border:2px solid #222;border-radius:6px; }
+[data-style="retro"] th { background:#f0f0f0;border-bottom:2px solid #222; }
+[data-style="retro"] .footer { color:#999; }
+
+/* ── 3. Folder 文件夹风 ── */
+[data-style="folder"] body {
+  background:#e8ecf1 url("data:image/svg+xml,%3Csvg width='6' height='6' xmlns='http://www.w3.org/2000/svg'%3E%3Ccircle cx='1' cy='1' r='0.5' fill='%23ccc' opacity='0.3'/%3E%3C/svg%3E");
+}
+[data-style="folder"] .wrap { max-width:880px; }
+[data-style="folder"] .header {
+  background:linear-gradient(180deg,#2563eb 0%,#1d4ed8 100%);
+  border:none;border-radius:12px 12px 0 0;color:white;
+  padding-bottom:2rem;position:relative;backdrop-filter:none;
+}
+[data-style="folder"] .header::before { display:none; }
+[data-style="folder"] .header::after {
+  content:'';position:absolute;bottom:-20px;left:50%;transform:translateX(-50%);
+  width:60px;height:40px;
+  background:linear-gradient(180deg,#94a3b8,#b0bec5);
+  border-radius:0 0 6px 6px;
+  box-shadow:inset 0 2px 4px rgba(0,0,0,0.2);
+  z-index:2;
+}
+[data-style="folder"] .header-tag { color:rgba(255,255,255,0.6); }
+[data-style="folder"] .header h1 {
+  background:none;-webkit-text-fill-color:#fff;
+}
+[data-style="folder"] .header-line { background:rgba(255,255,255,0.3); }
+[data-style="folder"] main { margin-top:1rem; }
+[data-style="folder"] .card {
+  background:white;border:none;border-radius:12px;
+  box-shadow:0 2px 12px rgba(0,0,0,0.06);backdrop-filter:none;
+  border-left:4px solid var(--accent,#2563eb);
+}
+[data-style="folder"] .card::before { display:none; }
+[data-style="folder"] .card:hover { box-shadow:0 8px 24px rgba(0,0,0,0.1);transform:translateY(-3px); }
+[data-style="folder"] .sub {
+  background:#f8fafc;border:1px solid #e2e8f0;border-radius:10px;
+  position:relative;
+}
+[data-style="folder"] .conclusion {
+  background:white;border:none;border-radius:12px;
+  box-shadow:0 2px 12px rgba(0,0,0,0.06);backdrop-filter:none;
+  border-top:4px solid #2563eb;
+}
+[data-style="folder"] .conclusion::before { display:none; }
+[data-style="folder"] .conclusion-label { color:#2563eb;background:rgba(37,99,235,0.08);border-color:rgba(37,99,235,0.12); }
+[data-style="folder"] .conclusion-content strong { color:#b45309; }
+[data-style="folder"] .conclusion-cta { background:#eff6ff;border-color:#bfdbfe; }
+[data-style="folder"] .num { border-radius:8px; }
+[data-style="folder"] .metric-card { border-radius:10px;box-shadow:0 2px 8px rgba(0,0,0,0.05); }
+
+/* ── 4. Receipt 打印热敏纸风 ── */
+[data-style="receipt"] .wrap { max-width:560px; }
+[data-style="receipt"] body { font-family:'SF Mono','Courier New','Noto Sans SC',monospace; }
+[data-style="receipt"] .header {
+  background:#fffef9;border:none;border-radius:0;
+  padding:2rem 1.5rem;backdrop-filter:none;
+  border-bottom:2px dashed #ccc;
+  position:relative;
+}
+[data-style="receipt"] .header::before {
+  content:'';position:absolute;top:-12px;left:0;right:0;height:12px;
+  background:url("data:image/svg+xml,%3Csvg width='24' height='12' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M0 12 Q6 0 12 12 Q18 0 24 12' fill='%23f5f0eb' stroke='none'/%3E%3C/svg%3E") repeat-x;
+  background-size:24px 12px;
+}
+[data-style="receipt"] .header h1 {
+  font-size:1.6rem;background:none;-webkit-text-fill-color:#000;
+  font-family:'SF Mono','Courier New',monospace;letter-spacing:0.05em;
+  text-transform:uppercase;
+}
+[data-style="receipt"] .header-tag { letter-spacing:0.3em;font-size:0.6rem; }
+[data-style="receipt"] .header-line { display:none; }
+[data-style="receipt"] .card {
+  background:#fffef9;border:none;border-radius:0;
+  border-bottom:2px dashed #ccc;backdrop-filter:none;
+  margin-bottom:0;box-shadow:none;
+}
+[data-style="receipt"] .card::before { display:none; }
+[data-style="receipt"] .card:hover { transform:none;box-shadow:none; }
+[data-style="receipt"] .card-head { padding:1.5rem 1.5rem 0.3rem; }
+[data-style="receipt"] .card-body { padding:0.25rem 1.5rem 1.5rem; }
+[data-style="receipt"] .num {
+  background:transparent !important;color:#000;border:2px solid #000;
+  border-radius:50%;width:32px;height:32px;font-size:0.75rem;
+  box-shadow:none;
+}
+[data-style="receipt"] .card-head h2 { font-size:1rem;text-transform:uppercase;letter-spacing:0.05em; }
+[data-style="receipt"] .sub {
+  background:transparent;border:none;border-radius:0;
+  padding:0.75rem 0;border-bottom:1px dashed #ddd;
+}
+[data-style="receipt"] .sub:hover { transform:none;background:transparent; }
+[data-style="receipt"] .sub h3 { border-bottom:none;font-size:0.82rem; }
+[data-style="receipt"] .conclusion {
+  background:#fffef9;border:none;border-radius:0;
+  border-bottom:2px dashed #ccc;border-top:2px dashed #ccc;
+  backdrop-filter:none;
+}
+[data-style="receipt"] .conclusion::before { display:none; }
+[data-style="receipt"] .conclusion::after { display:none; }
+[data-style="receipt"] .conclusion-label { background:#000;color:#fff;border:none;border-radius:2px; }
+[data-style="receipt"] .conclusion-content strong { color:#000;font-weight:900; }
+[data-style="receipt"] .conclusion-cta {
+  background:transparent;border:2px solid #000;border-radius:0;color:#000;
+  text-transform:uppercase;letter-spacing:0.08em;font-size:0.85rem;
+}
+[data-style="receipt"] .metric-card {
+  border:1px solid #ddd;border-radius:0;
+}
+[data-style="receipt"] .metric-card::before { display:none; }
+[data-style="receipt"] .metric-value { font-size:1.8rem; }
+[data-style="receipt"] table { border-radius:0;border:1px solid #ddd; }
+[data-style="receipt"] th { background:#f0ebe3;text-transform:uppercase; }
+[data-style="receipt"] .flow-content { border-radius:4px; }
+[data-style="receipt"] .footer {
+  border-top:2px dashed #ccc;padding-top:1.5rem;
+  font-family:'SF Mono','Courier New',monospace;
+}
+
+/* ── 5. Scrapbook 复古手账风 ── */
+[data-style="scrapbook"] body {
+  background:#d4a574;
+  background-image:
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='100' height='100'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100' height='100' filter='url(%23n)' opacity='0.06'/%3E%3C/svg%3E");
+}
+[data-style="scrapbook"] .header {
+  background:rgba(255,253,240,0.92);border:none;border-radius:4px;
+  box-shadow:2px 3px 12px rgba(0,0,0,0.15);backdrop-filter:none;
+  transform:rotate(-0.5deg);position:relative;
+}
+[data-style="scrapbook"] .header::before {
+  content:'';position:absolute;top:-8px;left:50%;transform:translateX(-50%);
+  width:16px;height:16px;background:#d32f2f;border-radius:50%;
+  box-shadow:inset -2px -2px 3px rgba(0,0,0,0.3), 0 2px 4px rgba(0,0,0,0.2);
+  z-index:2;
+}
+[data-style="scrapbook"] .header h1 {
+  background:none;-webkit-text-fill-color:#1a0e08;font-size:2rem;
+}
+[data-style="scrapbook"] .header-line { background:#d32f2f; }
+[data-style="scrapbook"] .card {
+  background:rgba(255,253,240,0.92);border:none;border-radius:4px;
+  box-shadow:2px 3px 12px rgba(0,0,0,0.12);backdrop-filter:none;
+  position:relative;
+}
+[data-style="scrapbook"] .card::before { display:none; }
+[data-style="scrapbook"] .card::after {
+  content:'';position:absolute;top:-6px;right:24px;
+  width:14px;height:14px;background:#d32f2f;border-radius:50%;
+  box-shadow:inset -1px -1px 2px rgba(0,0,0,0.3), 0 1px 3px rgba(0,0,0,0.2);
+}
+[data-style="scrapbook"] .card:nth-child(even) { transform:rotate(0.3deg); }
+[data-style="scrapbook"] .card:nth-child(odd) { transform:rotate(-0.3deg); }
+[data-style="scrapbook"] .card:hover { transform:rotate(0deg) translateY(-3px); }
+[data-style="scrapbook"] .sub {
+  background:rgba(255,255,200,0.5);border:1px solid rgba(0,0,0,0.06);
+  border-radius:2px;border-left:3px solid var(--accent,#d32f2f);
+}
+[data-style="scrapbook"] .num {
+  border-radius:50%;box-shadow:1px 2px 4px rgba(0,0,0,0.2);
+}
+[data-style="scrapbook"] .conclusion {
+  background:rgba(255,253,240,0.95);border:none;border-radius:4px;
+  box-shadow:2px 3px 12px rgba(0,0,0,0.15);backdrop-filter:none;
+  transform:rotate(0.3deg);
+  border-left:4px solid #d32f2f;
+}
+[data-style="scrapbook"] .conclusion::before { display:none; }
+[data-style="scrapbook"] .conclusion::after { display:none; }
+[data-style="scrapbook"] .conclusion-label { background:#d32f2f;color:#fff;border:none; }
+[data-style="scrapbook"] .conclusion-content strong { color:#d32f2f; }
+[data-style="scrapbook"] .conclusion-cta {
+  background:rgba(211,47,47,0.08);border:2px dashed #d32f2f;border-radius:2px;
+}
+[data-style="scrapbook"] .metric-card {
+  border-radius:2px;box-shadow:1px 2px 6px rgba(0,0,0,0.1);
+  transform:rotate(-0.5deg);
+}
+[data-style="scrapbook"] .metric-card:nth-child(even) { transform:rotate(0.5deg); }
+[data-style="scrapbook"] table { border-radius:2px; }
+[data-style="scrapbook"] .footer { color:#8b6f5e; }
+
+/* ── 6. Dossier 档案风 ── */
+[data-style="dossier"] body {
+  background:#b8956a;
+  background-image:
+    radial-gradient(ellipse at 20% 50%, rgba(160,110,60,0.4) 0%, transparent 50%),
+    radial-gradient(ellipse at 80% 50%, rgba(140,100,50,0.3) 0%, transparent 50%),
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='200' height='200' filter='url(%23n)' opacity='0.08'/%3E%3C/svg%3E");
+}
+[data-style="dossier"] .header {
+  background:white;border:none;border-radius:4px;
+  box-shadow:0 4px 16px rgba(0,0,0,0.2);backdrop-filter:none;
+  position:relative;padding-top:4rem;
+}
+[data-style="dossier"] .header::before {
+  content:'';position:absolute;top:0;left:50%;transform:translateX(-50%);
+  width:70px;height:50px;
+  background:linear-gradient(180deg,#9e9e9e,#bdbdbd,#9e9e9e);
+  border-radius:0 0 8px 8px;
+  box-shadow:0 3px 8px rgba(0,0,0,0.2), inset 0 -2px 4px rgba(0,0,0,0.1);
+  z-index:2;
+}
+[data-style="dossier"] .header h1 {
+  background:none;-webkit-text-fill-color:#111;font-size:1.8rem;
+  letter-spacing:0.02em;
+}
+[data-style="dossier"] .header-line { background:#d32f2f;width:40px; }
+[data-style="dossier"] .card {
+  background:white;border:none;border-radius:4px;
+  box-shadow:0 3px 12px rgba(0,0,0,0.15);backdrop-filter:none;
+  position:relative;
+}
+[data-style="dossier"] .card::before { display:none; }
+[data-style="dossier"] .card::after {
+  content:'';position:absolute;top:-7px;left:20px;
+  width:12px;height:12px;background:#d32f2f;border-radius:50%;
+  box-shadow:inset -1px -1px 2px rgba(0,0,0,0.3), 0 2px 4px rgba(0,0,0,0.2);
+}
+[data-style="dossier"] .card:hover { transform:translateY(-3px);box-shadow:0 8px 24px rgba(0,0,0,0.2); }
+[data-style="dossier"] .sub {
+  background:#f9f9f7;border:1px solid #e5e5e0;border-radius:4px;
+}
+[data-style="dossier"] .sub h3 { font-family:'SF Mono','Courier New','Noto Sans SC',monospace;font-size:0.82rem; }
+[data-style="dossier"] .num { border-radius:4px; }
+[data-style="dossier"] .conclusion {
+  background:white;border:none;border-radius:4px;
+  box-shadow:0 4px 16px rgba(0,0,0,0.2);backdrop-filter:none;
+  position:relative;
+}
+[data-style="dossier"] .conclusion::before {
+  content:'URGENT';position:absolute;top:12px;right:-8px;
+  background:#d32f2f;color:white;font-size:0.6rem;font-weight:800;
+  padding:0.2rem 0.8rem;letter-spacing:0.15em;
+  transform:rotate(3deg);
+  box-shadow:2px 2px 6px rgba(0,0,0,0.2);
+  border-radius:2px;
+  height:auto;width:auto;
+}
+[data-style="dossier"] .conclusion::after { display:none; }
+[data-style="dossier"] .conclusion-label { background:#333;color:white;border:none;border-radius:2px; }
+[data-style="dossier"] .conclusion-content strong { color:#d32f2f; }
+[data-style="dossier"] .conclusion-cta {
+  background:#fff3e0;border:1px solid #ffe0b2;border-radius:2px;
+}
+[data-style="dossier"] .metric-card { border-radius:4px;box-shadow:0 2px 8px rgba(0,0,0,0.1); }
+[data-style="dossier"] table { border-radius:4px; }
+[data-style="dossier"] .footer { color:rgba(255,255,255,0.5); }
+
 /* ── Print ── */
 @media print {
   body{background:#fff;color:#1a1a2e}
@@ -1192,7 +1598,8 @@ if __name__ == "__main__":
     parser.add_argument('--outdir', type=str, default="./output")
     parser.add_argument('--theme', type=str, default="light", choices=['light', 'poster'])
     parser.add_argument('--style', type=str, default="dark",
-                        choices=['dark', 'light', 'corporate', 'warm'])
+                        choices=['dark', 'light', 'corporate', 'warm',
+                                 'blueprint', 'retro', 'folder', 'receipt', 'scrapbook', 'dossier'])
     parser.add_argument('--animation', type=str, default="default",
                         choices=['minimal', 'stagger', 'poster', 'default'])
     args = parser.parse_args()
